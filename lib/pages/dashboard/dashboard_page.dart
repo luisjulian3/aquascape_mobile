@@ -129,3 +129,52 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 }
+
+
+// #Chart
+
+/*List<TemperatureData> _chartData;
+
+  @override
+  void initState() {
+    _chartData = getChartData();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(
+        title: ('Temperature'),
+      ),
+      body: SfCartesianChart(
+        series: <ChartSeries>[
+          AreaSeries<TemperatureData, double>(
+            dataSource: _chartData,
+            xValueMapper: (TemperatureData waktu, _) => waktu.nilai,
+            yValueMapper: (TemperatureData waktu, _) => waktu.waktu,
+          )
+        ],
+      ),
+    );
+  }*/
+
+
+/*List<TemperatureData> getChartData() {
+  final List<TemperatureData> chartData = [
+    TemperatureData(2012, 20),
+    TemperatureData(2013, 19),
+    TemperatureData(2014, 21),
+    TemperatureData(2015, 22),
+    TemperatureData(2016, 24),
+  ];
+  return chartData;
+}
+
+class TemperatureData {
+  TemperatureData(this.waktu, this.nilai);
+  final double waktu;
+  final double nilai;
+}
+
+*/

@@ -21,12 +21,16 @@ class _DashboardLightState extends State<DashboardLight> {
   Future apicall() async {
     http.Response response;
     response = await http.put(Uri.parse(
-        'https://project-aquascape-default-rtdb.asia-southeast1.firebasedatabase.app/ESP8266_Aqua/Fan.json'));
+        'https://aquascape-project-tdfkwdj56a-et.a.run.app/Lamp/UpdateLampFalse'));
     if (response.statusCode == 200) {
       setState(() {
-        //  stringResponse = response.body;
         mapResponse = json.decode(response.body);
-        dataResponse = mapResponse['Status'];
+        dataResponse = mapResponse['status'];
+        //  stringResponse = response.body;
+        _switch = ['status'] as bool;
+      });
+      setState(() {
+        _switch = ['status'] as bool;
       });
     }
   }
@@ -83,7 +87,15 @@ class _DashboardLightState extends State<DashboardLight> {
 }
 
 class Lamp {
-  final String Status;
+  final String on;
+  final String off;
 
-  Lamp(this.Status);
+  Lamp({required this.on, required this.off});
+
+  factory Lamp.fromJson(Map<String, dynamic> json) {
+    return Lamp(
+      on: json['true'],
+      off: json['false'],
+    );
+  }
 }

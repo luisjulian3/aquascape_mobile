@@ -1,16 +1,10 @@
-import 'package:aquascape_mobile/controllers/auth_controller.dart';
 import 'package:aquascape_mobile/controllers/controllerBindings.dart';
 import 'package:aquascape_mobile/pages/dashboard/dashboard_page.dart';
 import 'package:aquascape_mobile/pages/navigationbar/navigation_bar_binding.dart';
-import 'package:aquascape_mobile/pages/navigationbar/navigation_bar_controller.dart';
-import 'package:aquascape_mobile/pages/home/home_controller.dart';
 import 'package:aquascape_mobile/pages/home/home_page.dart';
-import 'package:aquascape_mobile/pages/login/login_page.dart';
 import 'package:aquascape_mobile/pages/navigationbar/navigation_bar_page.dart';
-import 'package:aquascape_mobile/pages/profile/profile_controller.dart';
 import 'package:aquascape_mobile/pages/profile/profile_page.dart';
 import 'package:aquascape_mobile/pages/root.dart';
-import 'package:aquascape_mobile/pages/sign_up/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,11 +18,10 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    AuthController authController = Get.put(AuthController());
-    authController.decideRoute();
-
     return GetMaterialApp(
       // bind our app with the  Getx Controller
       initialBinding: ControllerBindings(),
@@ -46,7 +39,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
             name: "/navigationbarbot",
-            page: () => NavigationBarBot(),
+            page: () => const NavigationBarBot(),
             binding: NavigationBarBinding()),
         GetPage(
           name: "/navigationbarbot/homepage",

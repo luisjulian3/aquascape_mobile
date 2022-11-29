@@ -16,7 +16,7 @@ class _DashboardLightState extends State<DashboardLight> {
   String? stringResponse;
   var mapResponse;
   var dataResponse;
-  bool _switch = false;
+  bool _switch = true;
 
   Future apicall() async {
     http.Response response;
@@ -24,9 +24,13 @@ class _DashboardLightState extends State<DashboardLight> {
         'https://project-aquascape-default-rtdb.asia-southeast1.firebasedatabase.app/ESP8266_Aqua/Fan.json'));
     if (response.statusCode == 200) {
       setState(() {
-        //  stringResponse = response.body;
-        mapResponse = json.decode(response.body);
+        mapResponse = json.decode(response.body)['Status'];
         dataResponse = mapResponse['Status'];
+        //  stringResponse = response.body;
+        _switch = true;
+      });
+      setState(() {
+        _switch = false;
       });
     }
   }
@@ -68,11 +72,13 @@ class _DashboardLightState extends State<DashboardLight> {
               Switch(
                   value: _switch,
                   onChanged: (_newvalue) {
+                    print("Status : $_newvalue");
                     setState(() {
                       {
                         _switch = _newvalue;
                       }
                     });
+                    // Value(_switch);
                   })
             ],
           ),
@@ -83,7 +89,15 @@ class _DashboardLightState extends State<DashboardLight> {
 }
 
 class Lamp {
-  final String Status;
+  final String on;
+  final String off;
 
-  Lamp(this.Status);
+  Lamp({required this.on, required this.off});
+
+  factory Lamp.fromJson(Map<String, dynamic> json) {
+    return Lamp(
+      on: json['on'],
+      off: json['off'],
+    );
+  }
 }

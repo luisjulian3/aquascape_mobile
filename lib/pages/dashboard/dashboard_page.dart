@@ -1,3 +1,4 @@
+import 'package:aquascape_mobile/pages/dashboard/dashboard_widgets/dashboard_fan.dart';
 import 'package:aquascape_mobile/pages/dashboard/dashboard_widgets/dashboard_light.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +18,10 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: ('Dasboard'),
+      appBar: AppBar(
+        title: Text('Dasboard'),
+        backgroundColor: Colors.black,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: GridView.count(
         padding: const EdgeInsets.all(25),
@@ -26,7 +29,13 @@ class _DashboardPageState extends State<DashboardPage> {
         children: <Widget>[
           Card(
             //Lampu
-            margin: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(20),
+            elevation: 4,
+            shadowColor: Colors.black,
+            shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.black),
+            ),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -35,23 +44,33 @@ class _DashboardPageState extends State<DashboardPage> {
                       builder: (context) => DashboardLight(),
                     ));
               },
-              splashColor: Colors.blue,
+              splashColor: Colors.black,
               child: Center(
-                  child: Column(
-                children: const <Widget>[
-                  Icon(
-                    Icons.lightbulb_outline,
-                    size: 70,
-                    color: Colors.yellowAccent,
-                  ),
-                  Text("Lampu", style: TextStyle(fontSize: 17.0)),
-                ],
-              )),
+                child: Column(
+                  children: const <Widget>[
+                    Icon(
+                      Icons.lightbulb_outline,
+                      size: 100,
+                      color: Colors.black,
+                    ),
+                    Text(
+                      "Lampu",
+                      style: TextStyle(fontSize: 17.0),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
           Card(
             //Sensor PH
-            margin: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(20),
+            elevation: 4,
+            shadowColor: Colors.black,
+            shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.black),
+            ),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -60,14 +79,14 @@ class _DashboardPageState extends State<DashboardPage> {
                       builder: (context) => DashboardSensorPH(),
                     ));
               },
-              splashColor: Colors.blue,
+              splashColor: Colors.black,
               child: Center(
                   child: Column(
                 children: const <Widget>[
                   Icon(
                     Icons.sensors,
-                    size: 70,
-                    color: Colors.redAccent,
+                    size: 100,
+                    color: Colors.black,
                   ),
                   Text("Sensor PH", style: TextStyle(fontSize: 17.0)),
                 ],
@@ -76,7 +95,13 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
           Card(
             //Temperature
-            margin: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(20),
+            elevation: 4,
+            shadowColor: Colors.black,
+            shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.black),
+            ),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -85,14 +110,14 @@ class _DashboardPageState extends State<DashboardPage> {
                       builder: (context) => DashboardTemperature(),
                     ));
               },
-              splashColor: Colors.blue,
+              splashColor: Colors.black,
               child: Center(
                   child: Column(
                 children: const <Widget>[
                   Icon(
                     Icons.thermostat,
-                    size: 70,
-                    color: Colors.greenAccent,
+                    size: 100,
+                    color: Colors.black,
                   ),
                   Text("Temperature", style: TextStyle(fontSize: 17.0)),
                 ],
@@ -101,7 +126,13 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
           Card(
             //Fish Feeder
-            margin: const EdgeInsets.all(8),
+            margin: const EdgeInsets.all(20),
+            elevation: 4,
+            shadowColor: Colors.black,
+            shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.black),
+            ),
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -110,71 +141,53 @@ class _DashboardPageState extends State<DashboardPage> {
                       builder: (context) => DashboardFishFeeder(),
                     ));
               },
-              splashColor: Colors.blue,
+              splashColor: Colors.black,
               child: Center(
                   child: Column(
                 children: const <Widget>[
                   Icon(
                     Icons.restaurant,
-                    size: 70,
-                    color: Colors.blueAccent,
+                    size: 100,
+                    color: Colors.black,
                   ),
                   Text("Fish Feeder", style: TextStyle(fontSize: 17.0)),
                 ],
               )),
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-
-// #Chart
-
-/*List<TemperatureData> _chartData;
-
-  @override
-  void initState() {
-    _chartData = getChartData();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: ('Temperature'),
-      ),
-      body: SfCartesianChart(
-        series: <ChartSeries>[
-          AreaSeries<TemperatureData, double>(
-            dataSource: _chartData,
-            xValueMapper: (TemperatureData waktu, _) => waktu.nilai,
-            yValueMapper: (TemperatureData waktu, _) => waktu.waktu,
+          Card(
+            //Fan
+            margin: const EdgeInsets.all(20),
+            elevation: 4,
+            shadowColor: Colors.black,
+            shape: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.black),
+            ),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DashboardFan(),
+                    ));
+              },
+              splashColor: Colors.black,
+              child: Center(
+                  child: Column(
+                children: const <Widget>[
+                  Icon(
+                    Icons.mode_fan_off_outlined,
+                    size: 100,
+                    color: Colors.black,
+                  ),
+                  Text("Fan", style: TextStyle(fontSize: 17.0)),
+                ],
+              )),
+            ),
           )
         ],
       ),
     );
-  }*/
-
-
-/*List<TemperatureData> getChartData() {
-  final List<TemperatureData> chartData = [
-    TemperatureData(2012, 20),
-    TemperatureData(2013, 19),
-    TemperatureData(2014, 21),
-    TemperatureData(2015, 22),
-    TemperatureData(2016, 24),
-  ];
-  return chartData;
+  }
 }
-
-class TemperatureData {
-  TemperatureData(this.waktu, this.nilai);
-  final double waktu;
-  final double nilai;
-}
-
-*/

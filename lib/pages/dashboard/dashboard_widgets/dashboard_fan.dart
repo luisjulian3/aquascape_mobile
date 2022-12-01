@@ -6,52 +6,47 @@ import 'package:http/http.dart' as http;
 
 import '../../../utils/utils.dart';
 
-class DashboardLight extends StatefulWidget {
-  const DashboardLight({super.key});
+class DashboardFan extends StatefulWidget {
+  const DashboardFan({super.key});
 
   @override
-  State<DashboardLight> createState() => _DashboardLightState();
+  State<DashboardFan> createState() => _DashboardFanState();
 }
 
-class _DashboardLightState extends State<DashboardLight> {
-  String url = 'https://aquascape-project-tdfkwdj56a-et.a.run.app/Lamp';
+class _DashboardFanState extends State<DashboardFan> {
+  String url = "https://aquascape-project-tdfkwdj56a-et.a.run.app/Fan";
   String? stringResponse;
-  var mapResponse;
-  var dataResponse;
-  bool _switch = true;
-  bool _newvalue = false;
+  bool _button = true;
   String _status = "";
-  late Future<Lamp> futureLamp;
+  late Future<Fan> futureFan;
 
-  Future<Lamp> DataLampu() async {
-    print('Data Lampu');
+  Future<Fan> DataFan() async {
+    print('Data Fan');
     http.Response response;
-    response = await http.get(
-        Uri.parse('https://aquascape-project-tdfkwdj56a-et.a.run.app/Lamp'));
+    response = await http.get(Uri.parse('url'));
 
     var res = jsonDecode(response.body);
-    //print(res['status']);
+
     if (response.statusCode == 200) {
       setState(() {
-        _switch = res['status'];
+        _button = res['status'];
       });
-      return Lamp.fromJson(res);
+      return Fan.fromJson(res);
     } else {
       throw Exception("failed to get status");
     }
-    // return true;
   }
 
-  Future putDataTrue() async {
+  Future putDataFanTrue() async {
     try {
-      print('putDataTrue');
-      final response = await http.put(Uri.parse(url + '/UpdateLampTrue'));
+      print('putDataFanTrue');
+      final response = await http.put(Uri.parse(url + '/UpdateFanTrue'));
       final json = '{"status": true}';
       // print(response.statusCode);
       if (response.statusCode == 200) {
         print(response.statusCode);
         setState(() {
-          _switch = true;
+          _button = true;
         });
       } else {
         _status = "Gagal";
@@ -61,18 +56,18 @@ class _DashboardLightState extends State<DashboardLight> {
     }
   }
 
-  Future putDataFalse() async {
+  Future putDataFanFalse() async {
     try {
-      print('putDataFalse');
-      final response = await http.put(Uri.parse(url + '/UpdateLampFalse'));
+      print('putDataFanFalse');
+      final response = await http.put(Uri.parse(url + '/UpdateFanFalse'));
       final json = '{"status": false}';
       // print(response.statusCode);
       if (response.statusCode == 200) {
         _status = "Mati";
         setState(() {
-          _switch = !_switch;
+          _button = !_button;
         });
-        print(_switch);
+        //     print(_switch);
       } else {
         _status = "gagal";
       }
@@ -84,18 +79,18 @@ class _DashboardLightState extends State<DashboardLight> {
   @override
   void initState() {
     super.initState();
-    futureLamp = DataLampu();
+    futureFan = DataFan();
   }
 
-  // ThemeData _dark =
-  //     ThemeData(brightness: Brightness.dark, primaryColor: Colors.white);
-  // ThemeData _light =
-  //     ThemeData(brightness: Brightness.light, primaryColor: Colors.black);
+  ThemeData _dark =
+      ThemeData(brightness: Brightness.dark, primaryColor: Colors.white);
+  ThemeData _light =
+      ThemeData(brightness: Brightness.light, primaryColor: Colors.black);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // theme: _switch ? _light : _dark,
+      theme: _button ? _light : _dark,
       home: Scaffold(
         appBar: CustomAppBar(
           title: ('Dasboard'),
@@ -104,17 +99,24 @@ class _DashboardLightState extends State<DashboardLight> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset(
-                fit: BoxFit.fill,
-                _switch ? 'assets/images/on.png' : 'assets/images/off.png',
-                height: 250,
+              Icon(
+                Icons.mode_fan_off,
+                size: 100,
+                color: Colors.blueAccent,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              SizedBox(
+                height: 20,
               ),
               Switch(
-                  value: _switch,
+                  //button
+                  value: _button,
                   onChanged: (value) {
                     print(value);
-                    if (_switch == true) {
-                      putDataFalse();
+                    if (_button == true) {
+                      putDataFanFalse();
                       Fluttertoast.showToast(
                           msg: "OFF",
                           toastLength: Toast.LENGTH_SHORT,
@@ -123,7 +125,7 @@ class _DashboardLightState extends State<DashboardLight> {
                           textColor: Colors.white,
                           fontSize: 16.0);
                     } else {
-                      putDataTrue();
+                      putDataFanTrue();
                       Fluttertoast.showToast(
                           msg: "ON",
                           toastLength: Toast.LENGTH_SHORT,
@@ -141,16 +143,19 @@ class _DashboardLightState extends State<DashboardLight> {
   }
 }
 
-class Lamp {
-  final String on;
-  final String off;
+void _button(BuildContext context) {
+  final Scaffold = ScaffoldMessenger.of(context);
+  Scaffold.showSnackBar(SnackBar(content: const Text('Halo')));
+}
 
-  Lamp({required this.on, required this.off});
+class Fan {
+  final bool status;
 
-  factory Lamp.fromJson(Map<String, dynamic> json) {
-    return Lamp(
-      on: json['on'],
-      off: json['off'],
+  const Fan({required this.status});
+
+  factory Fan.fromJson(Map<String, dynamic> json) {
+    return Fan(
+      status: json['Status'],
     );
   }
 }

@@ -38,8 +38,19 @@ class _DashboardSensorPH extends State<DashboardSensorPH> {
 
   @override
   Widget build(BuildContext context) {
-    return new SingleChildScrollView(
-      child: Column(),
+    return new Scaffold(
+      appBar: CustomAppBar(
+        title: ('SensorPh'),
+      ),
+      body: Center(
+        child: Container(
+          height: 200,
+          width: 300,
+          child: Center(
+            child: Text(mapResponse['Value'].toString()),
+          ),
+        ),
+      ),
     );
   }
 }

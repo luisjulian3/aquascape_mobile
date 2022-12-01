@@ -1,3 +1,4 @@
+import 'package:aquascape_mobile/pages/navigationbar/navigation_bar_page.dart';
 import 'package:aquascape_mobile/pages/profile/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -23,24 +24,6 @@ class AuthController extends GetxController {
     displayName = userProfile != null ? userProfile!.displayName! : '';
 
     super.onInit();
-  }
-
-  decideRoute() {
-    User? user = FirebaseAuth.instance.currentUser;
-
-    if (user != null) {
-      FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .get()
-          .then((value) {
-        if (value.exists) {
-          Get.to(() => HomePage());
-        } else {
-          Get.to(() => ProfilePage());
-        }
-      });
-    }
   }
 
   void signUp(String name, String email, String password) async {
@@ -179,3 +162,6 @@ extension StringExtension on String {
     return "${this[0].toUpperCase()}${this.substring(1)}";
   }
 }
+
+
+

@@ -40,9 +40,9 @@ class _NavigationBarBotState extends State<NavigationBarBot> {
             onItemSelected: controller.changeTabIndex,
             items: <BottomNavyBarItem>[
               BottomNavyBarItem(
-                icon: Icon(Icons.apps),
+                icon: Icon(Icons.home_outlined),
                 title: Text('Home'),
-                activeColor: Colors.green,
+                activeColor: Colors.black,
                 inactiveColor: _inactiveColor,
                 textAlign: TextAlign.center,
               ),
@@ -51,14 +51,14 @@ class _NavigationBarBotState extends State<NavigationBarBot> {
                 title: Text(
                   'Dashboard ',
                 ),
-                activeColor: Colors.pink,
+                activeColor: Colors.black,
                 inactiveColor: _inactiveColor,
                 textAlign: TextAlign.center,
               ),
               BottomNavyBarItem(
                 icon: Icon(Icons.people),
                 title: Text('Users'),
-                activeColor: Colors.purpleAccent,
+                activeColor: Colors.black,
                 inactiveColor: _inactiveColor,
                 textAlign: TextAlign.center,
               ),
